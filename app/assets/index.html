@@ -9,32 +9,21 @@
   <script type="text/javascript">
     var JUMP_ACCEL = 80000;
     var JUMP_CLAMP = 400;
+    var GRAVITY = 2400;
+
     game = new Phaser.Game(640, 480, Phaser.AUTO, 'game_div');
     var main_state = {
       preload: function() {
         game.load.image('player', 'images/player.png');
         game.load.image('ground', 'images/ground.png');
+        game.load.image('box', 'images/box.png');
         game.load.image('sky', 'images/sky.png');
         game.load.audio('jump', ['sounds/jump.mp3', 'sounds/jump.ogg']);
       },
       update: function() {
         game.physics.collide(this.player, this.ground);
-        this.player.body.velocity.x = 0;
-        if (this.cursors.left.isDown) {
-            //  Move to the left
-            this.player.body.velocity.x = -150;
-            this.player.animations.play('left');
-        }
-        else if (this.cursors.right.isDown) {
-            //  Move to the right
-            this.player.body.velocity.x = 150;
-            this.player.animations.play('right');
-        }
-        else {
-            //  Stand still
-            this.player.animations.stop();
-            this.player.frame = 4;
-        }
+        game.physics.collide(this.player, this.boxes);
+        game.physics.collide(this.ground, this.boxes);
 
         this.player.body.acceleration.y = 0;
         if (!this.cursors.up.isDown && this.player.body.velocity.y < -JUMP_CLAMP) {
@@ -58,9 +47,17 @@
           pieceOfGround.body.immovable = true;
         }
 
-        this.player = game.add.sprite(32, 200, 'player');
+        this.boxes = game.add.group();
+        for (var i = 0; i < 1; i++) {
+          box = this.boxes.create(game.world.width - 40, 0, 'box');
+          box.body.velocity.x = -100;
+          box.body.gravity.y = GRAVITY;
+          box.body.bounce.y = .2;
+        }
+
+        this.player = game.add.sprite(game.world.width / 6 - 16, 200, 'player');
         this.player.body.bounce.y = .1;
-        this.player.body.gravity.y = 2400;
+        this.player.body.gravity.y = GRAVITY;
         this.player.body.collideWorldBounds = true;
       }
     };
