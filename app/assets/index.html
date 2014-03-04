@@ -40,13 +40,13 @@
         if (!this.cursors.up.isDown && this.player.body.velocity.y < -JUMP_CLAMP) {
           this.player.body.velocity.y = -JUMP_CLAMP;
         }
-        if (this.player.isAboutToJump) {
-          game.sound.play('jump', 1000);
-          this.player.body.acceleration.y = -JUMP_ACCEL;
-          this.player.isAboutToJump = false;
-        }
         if (this.cursors.up.isDown && this.player.body.touching.down) {
           this.player.isAboutToJump = true;
+        }
+        if (this.player.isAboutToJump) {
+          game.sound.play('jump', 1);
+          this.player.body.acceleration.y = -JUMP_ACCEL;
+          this.player.isAboutToJump = false;
         }
       },
       create: function() {
