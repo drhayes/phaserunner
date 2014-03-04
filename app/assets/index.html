@@ -42,10 +42,9 @@
         this.sky = game.add.sprite(0, 0, 'sky');
         this.cursors = game.input.keyboard.createCursorKeys();
         this.ground = game.add.group();
-        for(var i=0;i<(game.world.width/32);i++){
-          pieceOfGround = this.ground.create(i*32, game.world.height - 32, 'ground');
-          pieceOfGround.body.immovable = true;
-        }
+        var pieceOfGround = this.ground.create(0, game.world.height - 32, 'ground');
+        pieceOfGround.body.immovable = true;
+        pieceOfGround.scale.setTo(20, 1);
 
         this.boxes = game.add.group();
         for (var i = 0; i < 1; i++) {
