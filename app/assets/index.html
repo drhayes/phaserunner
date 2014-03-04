@@ -7,7 +7,7 @@
   <script src="js/app.js"></script>
 
   <script type="text/javascript">
-    var JUMP_ACCEL = 20000;
+    var JUMP_ACCEL = 80000;
     var JUMP_CLAMP = 400;
     game = new Phaser.Game(640, 480, Phaser.AUTO, 'game_div');
     var main_state = {
@@ -60,7 +60,7 @@
 
         this.player = game.add.sprite(32, 200, 'player');
         this.player.body.bounce.y = .1;
-        this.player.body.gravity.y = 800;
+        this.player.body.gravity.y = 2400;
         this.player.body.collideWorldBounds = true;
       }
     };
