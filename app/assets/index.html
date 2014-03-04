@@ -5,7 +5,57 @@
   <title>Phaserunner Pants</title>
   <script src="js/vendor.js"></script>
   <script src="js/app.js"></script>
+
+  <script type="text/javascript">
+    game = new Phaser.Game(640, 480, Phaser.AUTO, 'game_div');
+    var main_state = {
+      preload: function (){
+        game.load.image('player', 'images/player.png');
+        game.load.image('ground', 'images/ground.png');
+        game.stage.backgroundColor = '#309ffa';
+      },
+      update: function (){
+        game.physics.collide(this.player, this.ground);
+        if (this.cursors.left.isDown)
+        {
+            //  Move to the left
+            this.player.body.velocity.x = -150;
+            this.player.animations.play('left');
+        }
+        else if (this.cursors.right.isDown)
+        {
+            //  Move to the right
+            this.player.body.velocity.x = 150;
+            this.player.animations.play('right');
+        }
+        else
+        {
+            //  Stand still
+            this.player.animations.stop();
+            this.player.frame = 4;
+        }
+      },
+      create: function (){
+        this.cursors = game.input.keyboard.createCursorKeys();
+        this.ground= game.add.group();
+        for(var i=0;i<(game.world.width/32);i++){
+          pieceOfGround = this.ground.create(i*32, game.world.height - 32, 'ground');
+          pieceOfGround.body.immovable = true;
+        }
+
+        this.player = game.add.sprite(32, 10, 'player');
+        this.player.body.bounce.y = .3;
+        this.player.body.gravity.y = 50;
+        this.player.body.collideWorldBounds = true;
+        
+      }
+    };
+    game.state.add('main', main_state);
+    game.state.start('main');
+  </script>
 </head>
 <body>
+  <div id='game_div'>
+  </div>
 </body>
 </html>
