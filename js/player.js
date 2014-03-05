@@ -17,6 +17,11 @@ module.exports = function(game) {
       if (cursors.up.isDown && this.sprite.body.touching.down) {
         this.sprite.isAboutToJump = true;
       }
+      if (cursors.left.isDown) {
+        this.sprite.body.velocity.x = -100
+      } else if (cursors.right.isDown) {
+        this.sprite.body.velocity.x = 100
+      }
       if (this.sprite.isAboutToJump) {
         game.sound.play('jump', 1);
         this.sprite.body.acceleration.y = -constants.JUMP_ACCEL;
