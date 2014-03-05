@@ -1,6 +1,7 @@
 
 var constants = require('./constants');
 var player = require('./player');
+var boxes = require('./boxes');
 
 game = new Phaser.Game(640, 480, Phaser.AUTO, 'game_div');
 var main_state = {
@@ -18,19 +19,13 @@ var main_state = {
     pieceOfGround.body.immovable = true;
     pieceOfGround.scale.setTo(20, 1);
 
-    this.boxes = game.add.group();
-    for (var i = 0; i < 1; i++) {
-      box = this.boxes.create(game.world.width - 40, 0, 'box');
-      box.body.velocity.x = -100;
-      box.body.gravity.y = constants.GRAVITY;
-      box.body.bounce.y = .2;
-    }
+    this.boxes = boxes(game);
     this.player = player(game);
   },
   update: function() {
     game.physics.collide(this.player.sprite, this.ground);
-    game.physics.collide(this.player.sprite, this.boxes);
-    game.physics.collide(this.ground, this.boxes);
+    game.physics.collide(this.player.sprite, this.boxes.group);
+    game.physics.collide(this.ground, this.boxes.group);
 
     this.player.update();
   }
