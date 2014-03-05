@@ -7,6 +7,7 @@ game = new Phaser.Game(640, 480, Phaser.AUTO, 'game_div');
 var main_state = {
   preload: function() {
     game.load.image('player', 'images/player.png');
+    game.load.image('chunks', 'images/chunks.png');
     game.load.image('ground', 'images/ground.png');
     game.load.image('box', 'images/box.png');
     game.load.image('sky', 'images/sky.png');

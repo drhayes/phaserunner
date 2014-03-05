@@ -7,6 +7,20 @@ module.exports = function(game) {
   player.body.collideWorldBounds = true;
   cursors = game.input.keyboard.createCursorKeys();
 
+  deathChunksEmitter = game.add.emitter(player.x, player.y, 200);
+  deathChunksEmitter.makeParticles('chunks', [0]);
+  deathChunksEmitter.minParticleSpeed.setTo(-200, 100);
+  deathChunksEmitter.maxParticleSpeed.setTo(200, -400);
+  deathChunksEmitter.gravity = constants.GRAVITY / 2;
+  deathChunksEmitter.bounce.setTo(0.5, 0.5);
+  deathChunksEmitter.angularDrag = 30;
+
+  player.events.onKilled.add(function() {
+    deathChunksEmitter.x = player.center.x;
+    deathChunksEmitter.y = player.center.y;
+    deathChunksEmitter.start(true, 1500, 15, 40);
+  });
+
   return {
     sprite: player,
     update: function() {
@@ -21,6 +35,10 @@ module.exports = function(game) {
         game.sound.play('jump', 1);
         this.sprite.body.acceleration.y = -constants.JUMP_ACCEL;
         this.sprite.isAboutToJump = false;
+      }
+
+      if (cursors.down.isDown) {
+        this.sprite.damage(5000);
       }
     }
   };
