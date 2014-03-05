@@ -1,5 +1,6 @@
 
 var constants = require('./constants');
+var playerChunks = require('./playerChunks');
 var player = require('./player');
 var boxes = require('./boxes');
 
@@ -21,12 +22,14 @@ var main_state = {
     pieceOfGround.scale.setTo(20, 1);
 
     this.boxes = boxes(game);
-    this.player = player(game);
+    this.playerChunks = playerChunks(game);
+    this.player = player(game, this.playerChunks);
   },
   update: function() {
     game.physics.collide(this.player.sprite, this.ground);
     game.physics.collide(this.player.sprite, this.boxes.group);
     game.physics.collide(this.ground, this.boxes.group);
+    game.physics.collide(this.playerChunks.emitter, this.ground);
 
     this.player.update();
   }
