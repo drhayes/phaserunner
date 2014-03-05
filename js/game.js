@@ -25,9 +25,9 @@ var main_state = {
   update: function() {
     game.physics.collide(this.player.sprite, this.ground);
     game.physics.collide(this.player.sprite, this.boxes.group);
-    game.physics.collide(this.ground, this.boxes.group);
 
     this.player.update();
+    this.boxes.update();
   }
 };
 game.state.add('main', main_state);
