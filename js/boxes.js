@@ -6,6 +6,7 @@ module.exports = function(game) {
   function addABox (x, y){
     var box = boxes.getFirstDead();
     box.body.velocity.x = -100;
+    box.body.immovable = true;
     box.outOfBoundsKill = true;
     box.reset(x, y);
   };
