@@ -32,6 +32,7 @@ var main_state = {
     game.physics.collide(this.playerChunks.emitter, this.ground);
 
     this.player.update();
+    this.boxes.update();
   }
 };
 game.state.add('main', main_state);
