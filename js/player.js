@@ -2,6 +2,7 @@ var constants = require('./constants');
 
 module.exports = function(game, chunks) {
   var player = game.add.sprite(game.world.width / 6 - 16, 200, 'player');
+  game.physics.enable(player, Phaser.Physics.ARCADE);
   player.body.bounce.y = .1;
   player.body.gravity.y = constants.GRAVITY;
   player.body.collideWorldBounds = true;

@@ -18,6 +18,7 @@ var main_state = {
     this.sky = game.add.sprite(0, 0, 'sky');
     this.ground = game.add.group();
     var pieceOfGround = this.ground.create(0, game.world.height - 32, 'ground');
+    game.physics.enable(pieceOfGround, Phaser.Physics.ARCADE);
     pieceOfGround.body.immovable = true;
     pieceOfGround.scale.setTo(20, 1);
 
@@ -26,10 +27,10 @@ var main_state = {
     this.player = player(game, this.playerChunks);
   },
   update: function() {
-    game.physics.collide(this.player.sprite, this.ground);
-    game.physics.collide(this.player.sprite, this.boxes.group);
-    game.physics.collide(this.ground, this.boxes.group);
-    game.physics.collide(this.playerChunks.emitter, this.ground);
+    game.physics.arcade.collide(this.player.sprite, this.ground);
+    game.physics.arcade.collide(this.player.sprite, this.boxes.group);
+    game.physics.arcade.collide(this.ground, this.boxes.group);
+    game.physics.arcade.collide(this.playerChunks.emitter, this.ground);
 
     this.player.update();
     this.boxes.update();
