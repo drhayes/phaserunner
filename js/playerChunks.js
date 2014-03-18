@@ -14,7 +14,9 @@ module.exports = function(game) {
     blowChunks: function(player) {
       chunks.x = player.center.x;
       chunks.y = player.center.y;
-      chunks.start(true, 1500, 15, 40);
+      chunks.width = player.body.width;
+      chunks.height = player.body.height;
+      chunks.start(true, 1500, 0, 160);
     }
   };
 
