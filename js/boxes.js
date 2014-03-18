@@ -4,7 +4,6 @@ module.exports = function(game) {
   var boxes = game.add.group();
   var one = boxes.create(200, game.world.height - 164, 'box');
   game.physics.enable(one, Phaser.Physics.ARCADE);
-  one.scale.setTo(6, 1);
   one.body.immovable = true;
   one.body.rebound = false;
   var velocity = -50
