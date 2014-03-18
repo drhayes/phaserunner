@@ -24,6 +24,8 @@ module.exports = function(game, chunks) {
         this.sprite.body.velocity.x = -100
       } else if (cursors.right.isDown) {
         this.sprite.body.velocity.x = 100
+      } else {
+        this.sprite.body.velocity.x = 0.7 * this.sprite.body.velocity.x;
       }
       if (this.sprite.isAboutToJump) {
         game.sound.play('jump', 1);
