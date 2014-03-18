@@ -8,7 +8,6 @@ module.exports = function(game) {
   one.body.immovable = true;
   one.body.rebound = false;
   var velocity = -50
-  console.log(one);
   one.events.onOutOfBounds.add(function (face, thisBody, bodyThatHitMe){
     velocity = -velocity;
   });

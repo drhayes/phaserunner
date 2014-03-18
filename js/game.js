@@ -17,10 +17,17 @@ var main_state = {
   create: function() {
     this.sky = game.add.sprite(0, 0, 'sky');
     this.ground = game.add.group();
-    var pieceOfGround = this.ground.create(0, game.world.height - 32, 'ground');
-    game.physics.enable(pieceOfGround, Phaser.Physics.ARCADE);
-    pieceOfGround.body.immovable = true;
-    pieceOfGround.scale.setTo(20, 1);
+    this.ground.enableBody = true;
+    this.ground.physicsBodyType = Phaser.Physics.ARCADE;
+    this.ground.createMultiple(20, 'ground', 0, true);
+    var counter = 0;
+    this.ground.forEach(function(piece) {
+      piece.body.x = counter * 32;
+      piece.body.y = game.world.height - 32;
+      piece.body.immovable = true;
+      counter++;
+      console.log(piece);
+    })
 
     this.boxes = boxes(game);
     this.playerChunks = playerChunks(game);
