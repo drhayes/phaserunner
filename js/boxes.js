@@ -22,7 +22,7 @@ module.exports = function(game) {
     one.checkWorldBounds = true;
     one.outOfBoundsKill = true;
     var height = game.world.randomY * 0.6;
-    one.reset(game.world.width - width, height, 1000);
+    one.reset(game.world.width - 1, height, 1000);
   }
 
   addABox();
