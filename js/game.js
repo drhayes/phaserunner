@@ -5,9 +5,18 @@ var player = require('./player');
 var boxes = require('./boxes');
 var ground = require('./ground');
 
-game = new Phaser.Game(640, 480, Phaser.AUTO, 'game_div');
+game = new Phaser.Game(640, 480, Phaser.AUTO, '');
+
 var main_state = {
   preload: function() {
+    game.scale.minWidth = 640;
+    game.scale.minHeight = 480;
+    game.scale.maxWidth = 1280;
+    game.scale.maxHeight = 960;
+    game.scale.pageAlignHorizontally = true;
+    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.refresh();
+
     game.load.image('player', 'images/player.png');
     game.load.image('chunks', 'images/chunks.png');
     game.load.image('ground', 'images/ground.png');
@@ -31,6 +40,7 @@ var main_state = {
     game.physics.arcade.collide(this.player.sprite, this.boxes.group);
     game.physics.arcade.collide(this.ground, this.boxes.group);
     game.physics.arcade.collide(this.playerChunks.emitter, this.ground.sprite);
+    game.physics.arcade.collide(this.playerChunks.emitter, this.boxes.group);
 
     this.player.update();
     this.boxes.update();
