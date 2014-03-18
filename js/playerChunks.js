@@ -6,7 +6,15 @@ module.exports = function(game) {
   chunks.setXSpeed(-200, 200);
   chunks.setYSpeed(-400, 100);
   chunks.gravity = constants.GRAVITY / 2;
-  chunks.bounce.setTo(1, 0.5);
+
+  Object.defineProperty(chunks, 'bounce', {
+    get: function() {
+      return {
+        x: 0,
+        y: Math.random() * 0.7
+      }
+    }
+  });
 
   var oldUpdate = chunks.update;
   chunks.update = function() {
@@ -15,8 +23,6 @@ module.exports = function(game) {
       chunk.alpha = game.math.clamp(chunk.lifespan / 1000, 0, 1)
     });
   };
-
-  var countdown;
 
   return {
     emitter: chunks,
