@@ -7,7 +7,12 @@ module.exports = function(game) {
   boxes.create(0, 0, 'box128', null, false);
   boxes.create(0, 0, 'box96', null, false);
   boxes.create(0, 0, 'box64', null, false);
- 
+  boxes.forEach(function(box) {
+    box.events.onOutOfBounds.add(function() {
+      console.log('out of bounds');
+      addABox();
+    });
+  });
 
   function addABox() {
     var one = boxes.getFirstDead();
@@ -16,8 +21,8 @@ module.exports = function(game) {
     one.body.immovable = true;
     one.checkWorldBounds = true;
     one.outOfBoundsKill = true;
-    var height = ((Math.round(Math.random() * 6) + 2) * 32) + 1;
-    one.reset(game.world.width - width, game.world.height - height, 1000);
+    var height = game.world.randomY * 0.6;
+    one.reset(game.world.width - width, height, 1000);
   }
 
   addABox();

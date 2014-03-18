@@ -1,9 +1,6 @@
 
-var constants = require('./constants');
-var playerChunks = require('./playerChunks');
-var player = require('./player');
-var boxes = require('./boxes');
-var ground = require('./ground');
+var boot = require('./boot');
+var main = require('./main');
 
 game = new Phaser.Game(640, 480, Phaser.AUTO, '');
 
@@ -46,5 +43,5 @@ var main_state = {
     this.boxes.update();
   }
 };
-game.state.add('main', main_state);
-game.state.start('main');
+game.state.add('boot', boot(game), true);
+game.state.add('main', main(game));
