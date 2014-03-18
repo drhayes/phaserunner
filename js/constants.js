@@ -1,4 +1,5 @@
 module.exports = {
+  PLAYER_HORIZ_VEL: 150,
   JUMP_ACCEL: 80000,
   JUMP_CLAMP: 400,
   GRAVITY: 2400

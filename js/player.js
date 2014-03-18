@@ -21,9 +21,9 @@ module.exports = function(game, chunks) {
         this.sprite.isAboutToJump = true;
       }
       if (cursors.left.isDown) {
-        this.sprite.body.velocity.x = -100
+        this.sprite.body.velocity.x = -constants.PLAYER_HORIZ_VEL;
       } else if (cursors.right.isDown) {
-        this.sprite.body.velocity.x = 100
+        this.sprite.body.velocity.x = constants.PLAYER_HORIZ_VEL;
       } else {
         this.sprite.body.velocity.x = 0.7 * this.sprite.body.velocity.x;
       }
