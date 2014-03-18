@@ -27,6 +27,7 @@ var main_state = {
     game.physics.arcade.collide(this.player.sprite, this.boxes.group);
     game.physics.arcade.collide(this.ground, this.boxes.group);
     game.physics.arcade.collide(this.playerChunks.emitter, this.ground.sprite);
+    game.physics.arcade.collide(this.playerChunks.emitter, this.boxes.group);
 
     this.player.update();
     this.boxes.update();
