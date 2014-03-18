@@ -7,7 +7,7 @@ module.exports = function(game) {
   boxes.create(0, 0, 'box3', null, false);
   boxes.create(0, 0, 'box4', null, false);
   boxes.create(0, 0, 'box5', null, false);
- 
+
 
   function addABox() {
     var one = boxes.getFirstDead();
@@ -18,7 +18,7 @@ module.exports = function(game) {
     one.body.rebound = false;
     one.checkWorldBounds = true;
     one.outOfBoundsKill = true;
-    var height = ((Math.round(Math.random() * 6) + 2) * 32) + 1;
+    var height = game.world.randomY * 0.8;
     one.reset(game.world.width - width, game.world.height - height, 1000);
     one.events.onOutOfBounds.add(function (){ addABox(); });
   }
